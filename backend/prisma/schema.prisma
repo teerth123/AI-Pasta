@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// const MODELS = {
+//   OPENAI_GPT4O: "gpt-4o",
+//   CLAUDE_OPUS: "claude-opus-4-5"
+// }
+
+/*
+  chats table
+  id, chat name, date created, summary(last 5 only), messages*
+
+  messages table
+  id, prompt, output, date created, chatid, relatedQueries, modelUsed
+*/
+
+model Chats {
+  id Int @id @unique @default(autoincrement())
+  chatName String
+  summary String @default("This is a new chat. The summary will be added once messages are added.")
+  dateCreated DateTime @default(now())
+  message Messages[]
+}
+
+model Messages {
+  id Int @id @unique @default(autoincrement())
+  prompt String
+  output String
+  relatedQueries String
+  modelUsed String
+  chat Chats @relation(fields: [chatId], references: [id])
+  chatId Int
+  dateCreated DateTime @default(now())
+}
