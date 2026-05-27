@@ -1,12 +1,14 @@
 import express from 'express';
-
+import cors from "cors"
 import { ChatRouter } from './src/chats/chat';
 import prisma from './src/db';
+import { HistoryRouter } from './src/history/history';
 
 const app = express();
 const port = Number(process.env.PORT ?? 3000);
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/health", async (_req, res) => {
   await prisma.$queryRaw`SELECT 1`;
@@ -14,6 +16,7 @@ app.get("/health", async (_req, res) => {
 });
 
 app.use("/api/v1/chat", ChatRouter);
+app.use("/api/v1/history", HistoryRouter);
 
 app.listen(port, () => {
   console.log(`server running on ${port}`);

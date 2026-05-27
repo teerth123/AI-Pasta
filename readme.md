@@ -29,4 +29,20 @@ gpt, anthropic, gemini thats it
 how much ai did i use
 - for making openrouter calls
 - for context formatting
-- 
+- for setting up prisma
+
+available free models - 
+3. nvidia/nemotron-3-super-120b-a12b:free
+4. minimax/minimax-m2.5:free
+5. qwen/qwen3-next-80b-a3b-instruct:free
+openai/gpt-oss-120b:free
+openai/gpt-oss-20b:free
+meta-llama/llama-3.3-70b-instruct:free
+meta-llama/llama-3.2-3b-instruct:free
+openrouter/free
+
+
+remaining - 
+chat.tsx cannot send new messages
+model selector
+add loading animation everywhere + msg stucks in the input after calling backend - make it chat like animation
